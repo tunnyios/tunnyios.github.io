@@ -106,8 +106,8 @@ excerpt_separator: "<!--more-->"
 detach:  false
 port:    4000
 host:    127.0.0.1
-baseurl: "/jekyll-omega-theme" # the subpath of your site, e.g. /blog/
-url: "http://blog.ibrother.me/jekyll-omega-theme" # the base hostname & protocol for your site
+baseurl: "/tunnyios.github.io # the subpath of your site, e.g. /blog/
+url: "http://tunnyios.github.io/tunnyios.github.io" # the base hostname & protocol for your site
 
 # Backwards-compatibility
 relative_permalinks: false
