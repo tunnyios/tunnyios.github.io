@@ -1,8 +1,8 @@
-title:            ibrother
+title:            tunny
 description:      "Talk is cheap, show me the code"
 logo:             omikron.png
 disqus_shortname:
-duoshuo_shortname:  i2brother
+duoshuo_shortname: tunny 
 # Assign a default image for your site's header and footer
 default_bg:       http://i2brother.qiniudn.com/bg2.jpg
 search:           true
@@ -19,21 +19,21 @@ fin_color:        "255,255,255"
 
 # Owner/author information
 owner:
-  name:           ibrother
+  name:           tunnyios
   avatar:         moe.png
-  email:          ibrother.linux@gmail.com
+  email:          shc245245@126.com
   # Use the coder's toolbox at http://coderstoolbox.net/string/#!encoding=xml&action=encode&charset=us_ascii to encode your description into XML string
-  description:    大叔一枚
+  description:    享受生活
   # Social networking links used in footer. Update and remove as you like.
-  twitter:        IbrotherLinux
-  facebook:       ibrother.me
-  github:         ibrother
+  twitter:        
+  facebook:       
+  github:         tunnyios
   stackexchange:  
   linkedin:       
   instagram:      
   flickr:         
   tumblr:         
-  weibo: 234684967
+  weibo: suhongcheng@gmail.com
   # For Google Authorship https://plus.google.com/authorship
 google_plus:    
 
