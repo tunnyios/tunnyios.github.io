@@ -1,4 +1,4 @@
-------
+---
 layout: post
 title: Object－C初探(1)
 description: "objetc-c语法的一些特性，以及面向对象特性"
@@ -7,7 +7,7 @@ tags: [OC, 面向对象, oc语法特性]
 imagefeature: 2015-03-12.JPG
 comments: true
 mathjax:
-------
+---
 
 
 # 欢迎使用 Cmd - 在线 Markdown 编辑阅读器
