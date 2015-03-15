@@ -26,9 +26,11 @@ mathjax:
 
 1. oc中以@开头得都是Foundation框架得NSString类型的字符串。
 2. oc有3中数据类型：基础类型，对象类型，id类型
+
 > * 基础类型不需要加＊，包括int、float、double、和char类型
 > *	对象类型指的是类或协议所声明的指针类型必须要加＊
 > *	id类型可以表示任 意类型，但一般只表示对象类型
+
 
 请保留此份 Cmd Markdown 的欢迎稿兼使用说明，如需撰写新稿件，点击顶部工具栏右侧的 <i class="icon-file"></i> **新文稿** 或者使用快捷键 `Ctrl+Alt+N`。
 
