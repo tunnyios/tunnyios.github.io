@@ -13,7 +13,7 @@ mathjax:
 
 > * 充满仪式性的第一次。初探Object-C特性
 
-1.	oc中以@开头得都是Foundation框架得NSString类型的字符串。
+1. oc中以@开头得都是Foundation框架得NSString类型的字符串。
 2.	oc有3中数据类型：基础类型，对象类型，id类型
 
 > * 基础类型不需要加＊，包括int、float、double、和char类型
