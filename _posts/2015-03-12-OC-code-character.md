@@ -1,15 +1,17 @@
 ---
 layout: post
-title: Object－C初探(1)
-description: "objetc-c语法的一些特性，以及面向对象特性"
+title: Objective－C初探(1)
+description: "objective-c语法的一些特性，以及面向对象特性"
 category: sample-post
 tags: [OC, 面向对象, oc语法特性]
-imagefeature: 2015-03-12.JPG
+imagefeature: 
 comments: true
 mathjax:
 ---
 
 ------
+
+![pitcure](http://tunnyios.github.io/images/2015-03-12.JPG)
 
 充满仪式性的第一次。初探Object-C特性
 
@@ -38,7 +40,7 @@ oc有3中数据类型：基础类型，对象类型，id类型
 > * 实例方法：只能被实例个体调用，用－；实例方法可以访问类变量。
 > * 类方法：可以被类直接调用，用+；类方法不能访问实例成员变量。
 
-#### Objective-C code 1.0
+#### Objective-C code 1.0 属性和类方法
 
 {% highlight objective-c %}
 static int count;
@@ -92,7 +94,9 @@ static int count;
 属性：使用getter和setter方法，太繁琐。因此提出了属性的概念。在接口定义部分，使用@property关键字，定义属性后就会产生get和set方法(如果不想让人访问，可以不定义属性)属性的调用和成员变量的调用是不一样的，因此通过调用的方式可以看出来调用的是成员变量的方式还是属性的方式。
 
 一般我们把成员变量和属性明明相同，意味着这个属性是为了这个成员变量而封装的。其实属性并不真正保存数据，而是通过属性的set方法，帮刘道成员变量里去了，属性是两个方法，通过这两个方法改变成员变量的值。 属性访问用.  成员变量访问用 ->  方法访问用[]
-#### Objective-C code 1.1
+
+#### Objective-C code 1.1 属性示例
+
 {% highlight objective-c %}
 Song *mySong = [[Song alloc] init];
 
@@ -116,7 +120,7 @@ mySong->title = @"xxxx";
 
 **如code1.0** init方法是默认构造方法,在这个构造方法中累计类变量 count,在实例方法中可以访问类变量的,但是类方法不能 访问实例变量。initCount 方法是一个普通的类方法,用于 返回类变量count,initialize方法是非常特殊的类方法, 它是在类第一次访问时候被自动调用,因此它一般用来初始 化类变量的,类似于C#中的静态构造方法。
 
-####Objective-C code 1.2 实例构造方法--模式代码
+#### Objective-C code 1.2 实例构造方法--模式代码
 
 {% highlight objective-c %}
 -(Song *) initWithTile: (NSString *) newTitle andArtist: (NSString *) newArtist andDuration: (long int) newDuration
