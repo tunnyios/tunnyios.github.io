@@ -90,6 +90,9 @@ static int count;
 }
 
 @end
+
+int main( int argc, const char *argv[] ) 
+{	ClassA *c1 = [[ClassA alloc] init];	ClassA *c2 = [[ClassA alloc] init];	// print count	NSLog(@"ClassA count: %i", [ClassA initCount] );	ClassA *c3 = [[ClassA alloc] init];	NSLog(@"ClassA count: %i", [ClassA initCount] );	[c1 release];	[c2 release];	[c3 release];		return 0;｝
 {% endhighlight %}
 
 从面向对象的封装角度考虑，想要访问类中的成员变量是用通过实例方法访问。成员变量前面要有作用域限定符(protected、public、private 缺省情况是protected)成员变量的访问是通过读取方法(getter)和设定方法(setter)。这三个作用域限定符只能限定成员变量，不能限定类变量，更不能限定实例成员方法。protected限定可以在子类中继承下去；private限定只能在该类中使用。
@@ -117,11 +120,11 @@ mySong->title = @"xxxx";
 
 实例构造函数：创建实例(以ini开头)返回自身类型的指针，在.h中定义(分配内存实例化，然后构造)，实例构造函数也是模式代码 **如code1.2**
 
-类构造函数：直接调用方法进行构造，类构造函数以类with开头。类构造函数是特定写法，**如code1.0**且只有一个。他在类第一次访问的时候被自动调用，因此一般用来初始化类变量。
+类构造函数：直接调用方法进行构造，类构造函数以类with开头。类构造函数是特定写法，**如code1.0**且**只有一个**。他在类第一次访问的时候被自动调用，因此一般用来初始化类变量，并且**只调用一次**。
 
 每一个类都会有2个初始化函数，一个是实例初始化函数，一个是类初始化函数。实例初始化函数需要写alloc，并且使用完后需要 release ； 类 初始化函数不用写alloc函数，使用完后会被自动释放池释放。不需要手动release。
 
-**如code1.0** init方法是默认构造方法,在这个构造方法中累计类变量 count,在实例方法中可以访问类变量的,但是类方法不能 访问实例变量。initCount 方法是一个普通的类方法,用于 返回类变量count,initialize方法是非常特殊的类方法, 它是在类第一次访问时候被自动调用,因此它一般用来初始 化类变量的,类似于C#中的静态构造方法。
+**如code1.0** init方法是默认构造方法,在这个构造方法中累计类变量 count,在实例方法中可以访问类变量的,但是类方法不能 访问实例变量。initCount 方法是一个普通的类方法,用于返回类变 count, initialize方法是非常特殊的类方法, 它是在类第一次访问时候被自动调用,因此它一般用来初始 化类变量的,类似于C#中的静态构造方法。在第一次实例化ClassA时候会调用两个方法: initialize 类方法和实例构造方法init,然后再次实例化ClassA时候只 是调用实例构造方法init,而没有调用initialize类方法。这样类变量count被一直累加,它隶属类因此c1实例可以 访问,c2和c3都可以访问。
 
 #### Objective-C code 1.2 实例构造方法--模式代码
 
