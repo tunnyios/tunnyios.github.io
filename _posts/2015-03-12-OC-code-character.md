@@ -11,61 +11,128 @@ mathjax:
 
 ------
 
-> * 充满仪式性的第一次。初探Object-C特性
+充满仪式性的第一次。初探Object-C特性
 
-1. oc中以@开头得都是Foundation框架得NSString类型的字符串。
-2.	oc有3中数据类型：基础类型，对象类型，id类型
+oc中以@开头得都是Foundation框架得NSString类型的字符串。
+
+oc有3中数据类型：基础类型，对象类型，id类型
 
 > * 基础类型不需要加＊，包括int、float、double、和char类型
 > *	对象类型指的是类或协议所声明的指针类型必须要加＊
 > *	id类型可以表示任 意类型，但一般只表示对象类型
 
-3.	%i 表示格式化输出int类型  %o 8进制 %#x 16进制; %f 浮点类型会保留6位 %@ 打印对象
-4.	数据类型转换，总的原则：小存储容量数据类型可以自动转换成大存储容量数据类型。
-	不同类型数据间按照下面关系的从左到右(从低到高)自动转换
+%i 表示格式化输出int类型  %o 8进制 %#x 16进制; %f 浮点类型会保留6位 %@ 打印对象
+
+数据类型转换，总的原则：小存储容量数据类型可以自动转换成大存储容量数据类型。
+> * 不同类型数据间按照下面关系的从左到右(从低到高)自动转换
 		_Bool、char、short、int、枚举类型->int->long int->long long->float->double->long double
 
-	[^1]
-<!--more-->
+@interface部分定义了类名、继承的父类、实现的协议、成员变量和成员方法等信息，主要做定义成员变量和成员方法
 
-[^1]: <http://en.wikipedia.org/wiki/Syntax_highlighting>
+@implementation部分实现了接口部分定义的成员方法，主要做了两件事：实现成员方法，以及对成员方法的初始化
+> * 初始化由它的构造函数来做，所以第一步先定义构造函数，如果没有定义构造函数就是用默认的构造函数，然后再实现方法。
 
-### Pygments高亮代码块
+实例成员变量、类变量、实力方法、类方法：
+> * 实例成员变量：即对象变量，不用static修饰，放在@interface里面。实例变量的初始化用实例构造函数。
+> * 类变量：即静态变量，用static休息，放在@interface上面。类变量的初始化用类构造函数。
+> * 实例方法：只能被实例个体调用，用－；实例方法可以访问类变量。
+> * 类方法：可以被类直接调用，用+；类方法不能访问实例成员变量。
 
-#### C
+#### Objective-C code 1.0
 
-{% highlight c %}
-#include <stdio.h>
-int main(void)
+{% highlight objective-c %}
+static int count;
+@interface Song : NSobject{
+	@pubilc
+	NSString *title;
+	NSString *artist;
+	long int duration;
+}
+//操作方法
+-(void)start;
+-(void)stop;
+-(seek):(long int)time;
++(int) initCount;
++(void) initialize;
+//访问成员变量的方法
+@property(copy,readwrite) NSString *title;
+@property(nonatomic,retain) NSString *artist;
+@property(readonly) long int duration;
+@end
+
+
+@implementation Song
+
+@synthesize title;   //属性必须用synthesize 组装
+@synthesize artist;
+@synthesize duration;
+
+-(id) init
 {
-    printf("Hello World\n");
-    return 0;
+	self = [super init];
+	count++;
+	return self;
+}
+
++(int) initCount
+{
+	return count;
+}
+
++(void) initialize
+{
+	count = 0;
+}
+
+@end
+{% endhighlight %}
+
+从面向对象的封装角度考虑，想要访问类中的成员变量是用通过实例方法访问。成员变量前面要有作用域限定符(protected、public、private 缺省情况是protected)成员变量的访问是通过读取方法(getter)和设定方法(setter)。这三个作用域限定符只能限定成员变量，不能限定类变量，更不能限定实例成员方法。protected限定可以在子类中继承下去；private限定只能在该类中使用。
+
+属性：使用getter和setter方法，太繁琐。因此提出了属性的概念。在接口定义部分，使用@property关键字，定义属性后就会产生get和set方法(如果不想让人访问，可以不定义属性)属性的调用和成员变量的调用是不一样的，因此通过调用的方式可以看出来调用的是成员变量的方式还是属性的方式。
+
+一般我们把成员变量和属性明明相同，意味着这个属性是为了这个成员变量而封装的。其实属性并不真正保存数据，而是通过属性的set方法，帮刘道成员变量里去了，属性是两个方法，通过这两个方法改变成员变量的值。 属性访问用.  成员变量访问用 ->  方法访问用[]
+#### Objective-C code 1.1
+{% highlight objective-c %}
+Song *mySong = [[Song alloc] init];
+
+/* OC会自动生成一个下划线的方法来获取title的值*/
+mySong.title = @"xxxxx";
+self.title = @"xxxxx";
+_title = @"xxxxx";			//属性访问
+[mySong setTitle: @"xxxx"];
+mySong->title = @"xxxx";
+//用完之后一定要release
+[mySong release];
+{% endhighlight %}
+
+构造方法：主要目的是初始化成实例员变量。
+
+实例构造函数：创建实例(以ini开头)返回自身类型的指针，在.h中定义(分配内存实例化，然后构造)，实例构造函数也是模式代码 **如code1.2**
+
+类构造函数：直接调用方法进行构造，类构造函数以类with开头。类构造函数是特定写法，**如code1.0**且只有一个。他在类第一次访问的时候被自动调用，因此一般用来初始化类变量。
+
+每一个类都会有2个初始化函数，一个是实例初始化函数，一个是类初始化函数。实例初始化函数需要写alloc，并且使用完后需要 release ； 类 初始化函数不用写alloc函数，使用完后会被自动释放池释放。不需要手动release。
+
+**如code1.0** init方法是默认构造方法,在这个构造方法中累计类变量 count,在实例方法中可以访问类变量的,但是类方法不能 访问实例变量。initCount 方法是一个普通的类方法,用于 返回类变量count,initialize方法是非常特殊的类方法, 它是在类第一次访问时候被自动调用,因此它一般用来初始 化类变量的,类似于C#中的静态构造方法。
+
+####Objective-C code 1.2 实例构造方法--模式代码
+
+{% highlight objective-c %}
+-(Song *) initWithTile: (NSString *) newTitle andArtist: (NSString *) newArtist andDuration: (long int) newDuration
+{
+//固定写法，创建父类对象 self相当于this super代表父类
+	self = [super init];
+	if (self)
+	{
+		_title = @"xxxx";
+		artist = @"xxxx";
+		[self setDuration: @"xxxx"];
+	}
+	
+	return self;
 }
 {% endhighlight %}
 
-#### Java
 
-{% highlight java linenos %}
-class helloworld
-{
-    public static void main(String args[])
-    {
-        System.out.println("Hello World");
-    }
-}
-{% endhighlight %}
 
-### 标准代码块
-
-#### Python
-
-~~~ python
-#!/usr/bin/python
-printf("Hello World")
-~~~
-
-### 行内代码
-
-#### Bash
-
-`echo "Hello World"`
