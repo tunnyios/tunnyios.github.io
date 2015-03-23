@@ -1,7 +1,7 @@
 ---
 layout: post
 type:  photo                # ! Important
-photo: http://e.picphotos.baidu.com/album/s%3D1000%3Bq%3D90/sign=f1942aad2c34349b70066a85f9da2ebf/d31b0ef41bd5ad6e097daf5d85cb39dbb7fd3c85.jpg 		# In case you do not want the featured image to display on the front page
+photo: http://tunnyios.github.io/images/2015-03-18.JPG 		# In case you do not want the featured image to display on the front page
 title: "Objective-C初探(2)"         # Title of the post
 description: "objective-c语法特性之继承、多态、分类、协议"   # Description of the post, used for Facebook Opengraph & Twitter
 headline: Some headline       # Will appear in bold letters on top of the post
@@ -15,6 +15,7 @@ mathjax:
 ---
 
 ------
+
 ### 继承与多态
 
 继承性：objective-c可以继承非private限定的成员变量；属于单重继承，即只有一个父类。为了实现多重继承objective引入了协议。子类可以重写父类的方法，以及命名与父类同名的成员变量(即隐藏父类的成员变量)
