@@ -24,6 +24,7 @@ mathjax:
 
 多态性是指在父类中定义的成员变量和方法呗子类继承后，可以具有不同的数据类型或表现出不同的行为。声明一个对象，它的类型是父类的类型，而实例化子类的实例。在java、c++种都有这种写法，在objective-c里也可以这样写，属于**静态类型**。
 
+<!--more-->
 #### Objective-C code 1.0 静态类型对象声明
 
 {% highlight objective-c %}
@@ -172,6 +173,8 @@ Student *stu2 = [stu1 copy];
 {% endhighlight %}
 
 如果你的类产生了子类，那么copyWithZone:方法也将被继承。Student *stu = [[Student allocWithZone:zone] init];	该方法应该改为 Student *stu = [[[slef class] allocWithZone:zone] init];如果编写一个类的copyWithZone:方法，那么子类的方法应该先调用父类的copy方法以复制继承来copy实例变量。
+
+浅层复制和深层复制的区别：浅层复制时通过创建一个指针指向那个地址，浅层复制会影响这两个指针，如果release掉其中一个，另一个也被release了；因此一般都会用深层复制，创建一个对象，把原有对象的成员变量的状态都复制过去。释放一个类对象时，先释放类的成员变量，再释放类对象。
 
 NSCoding协议 可序列化问题。对象能够存到文件里(序列化)，从文件里读取数据到对象(反序列化)， 这个对象必须实现NSCoding这个协议。 - (void) initWtihCoder:(NSCoder *)decoder; - (void) encodeWithCoder:(NSCoder *)encoder;
 
