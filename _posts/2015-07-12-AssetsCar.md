@@ -21,6 +21,8 @@ mathjax:
 
 使用themeEngine工具，可以打开Assets.car文件。这软件需要Mac OS X Yosemite10.10.1以上的系统运行，Photo Shop需要13.0以上版本，解包之后可以直接在软件里面Send to Photoshop修改素材，修改之后还可以直接从Photoshop里面读取。非常方便。
 
+*链接: http://pan.baidu.com/s/1gdCQ7D5 密码: 8bev*
+
 *使用效果图*
  
 ![pitcure](http://tunnyios.github.io/images/150712_Assets01.png)
@@ -32,6 +34,8 @@ mathjax:
 1. 到github上下载cartool项目
 2. 在Xcode中编译运行
 3. 设置参数源路径和目标路径
+
+*链接: https://github.com/tunnyios/cartool.git*
 
 *配置效果图*
 
