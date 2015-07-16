@@ -4,7 +4,7 @@ logo:             omikron.png
 disqus_shortname:
 duoshuo_shortname: tunny 
 # Assign a default image for your site's header and footer
-default_bg:       http://tunnyios.github.io/images/background.jpg
+default_bg:       http://7xke07.com1.z0.glb.clouddn.com/image/background01.jpg
 search:           true
 share:            true
 # Read Time is a calculator tp provide post read-time based on word count. Usage is recommended.
@@ -20,7 +20,7 @@ fin_color:        "255,255,255"
 # Owner/author information
 owner:
   name:           tunnyios
-  avatar:         moe.png
+  avatar:         http://7xke07.com1.z0.glb.clouddn.com/image/touxiang01.jpg
   email:          shc245245@126.com
   # Use the coder's toolbox at http://coderstoolbox.net/string/#!encoding=xml&action=encode&charset=us_ascii to encode your description into XML string
   description:    享受生活
