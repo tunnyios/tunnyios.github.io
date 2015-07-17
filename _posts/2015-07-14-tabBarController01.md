@@ -87,4 +87,4 @@ profileSB.instantiateInitialViewController
 
 事例图：
 
-![pitcure](http://7xke07.com1.z0.glb.clouddn.com/15-7-14/82900244.jpg)
+![pitcure](http://7xke07.com1.z0.glb.clouddn.com/image/storyboard.png)
