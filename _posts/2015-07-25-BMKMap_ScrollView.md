@@ -39,6 +39,7 @@ mathjax:
 * 拦截触摸事件
 * tracking属性变为YES
 * 一个内置的计时器开始生效，用来监控在极短的事件间隔内是否发生了手指移动
+* 
 > * case1：当检测到时间间隔内手指发生了移动，UIScrollView自己触发滚动，取消发送tracking 给子视图。tracking属性变为NO。手指触摸下即使有(可以响应触摸事件的)内部控件也不会再响应触摸事件。
 > * case2：当检测到时间间隔内手指没有移动，当时间结束时，，UIScrollView会发送tracking events到子视图上。tracking属性保持YES。手指触摸下如果有(可以响应触摸事件的)内部控件，则将触摸事件传递给控件进行处理。
 
@@ -94,4 +95,4 @@ UIScrollView的子控件想要接收touch事件，就是用户点击UIScrollView
 
 ###demo代码分享
 
-链接: http://pan.baidu.com/s/1jGznMbO 密码: 347m
+链接: http://pan.baidu.com/s/1o6vckjw 密码: vyx4
