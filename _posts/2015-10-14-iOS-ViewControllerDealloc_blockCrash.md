@@ -12,7 +12,8 @@ mathjax:
 ------
 
 ![](http://7xke07.com1.z0.glb.clouddn.com/2015-10-14-iOS-ViewControllerDealloc_blockCrash.JPG)
-##iOS中控制器的释放问题
+
+##**iOS中控制器的释放问题**
 
 ARC工程是可以重写dealloc方法并被系统调用的，但不需要手动调用父类的dealloc，手写[super dealloc]方法会报错，事实上系统会自动帮你调用父类的dealloc方法，不需要你实现。可以通过在dealloc方法中打印log查看控制器是否被释放。
 
@@ -20,7 +21,7 @@ ARC工程是可以重写dealloc方法并被系统调用的，但不需要手动�
 
 <!--more-->
 
-###控制器中NSTimer没有被销毁
+###**控制器中NSTimer没有被销毁**
 
 当控制器中存在NSTimer时，就需要注意，因为当**[NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(updateTime:) userInfo:nil repeats:YES];**时，这个/*target:self*/ 就增加了VC的RetarnCountr, 如果你不将这个timer invalidate，就别想调用dealloc。需要在viewWillDisappear之前需要把控制器用到的NSTimer销毁。
 
@@ -31,12 +32,12 @@ ARC工程是可以重写dealloc方法并被系统调用的，但不需要手动�
 timer = nil; 
 {% endhighlight %}
 
-###控制器中的代理不是weak属性
+###**控制器中的代理不是weak属性**
 
-**@property (nonatomic, weak) id<HCAppViewDelegate> delegate;**代理要使用弱引用，因为自定义控件是加载在视图控制器中的，视图控制器view对自定义控件是强引用，
+例如**@property (nonatomic, weak) id<HCAppViewDelegate> delegate;**代理要使用弱引用，因为自定义控件是加载在视图控制器中的，视图控制器view对自定义控件是强引用，
 如果代理属性设置为strong，则意味着delegate对视图控制器也进行了强引用，会造成循环引用。导致控制器无法被释放，最终导致内存泄漏。
 
-###控制器中block的循环引用
+###**控制器中block的循环引用**
 
 block会把它里面的所有对象强引用(在ARC下)/*PS:MRC下会retain加1*/，包括当前控制器self，因此有可能会出现循环引用的问题。
 即一个对象有一个Block属性，然而这个Block属性中又引用了对象的其他成员变量，那么就会对这个变量本身产生强应用，那么这个对象本身和他自己的Block属性就形成了循环引用。在ARC下需要修改成这样：(/*也就是生成一个对自身对象的弱引用*/)
