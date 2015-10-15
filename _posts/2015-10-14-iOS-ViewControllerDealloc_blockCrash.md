@@ -46,4 +46,11 @@ block会把它里面的所有对象强引用(在ARC下)/*PS:MRC下会retain加1*
 __weak typeof(self) weakSelf = self;
 {% endhighlight %}
 
+###**注意**
+
+其实总结下来也就是：控制器强引用着 block 。凡是控制器的对象，或者控制器的成员变量(*无论成员变量是基础类型还是其他的*)，只要在 block 中就会被强引用，(间接导致 block 强引用了控制器)。引发循环引用，最终导致内存泄漏！
+
 **即：保险起见block中所有的涉及到self的全给替换成weakSelf**
+
+另外：系统自带的动画的 block 方法、 dispathafter()等方法，可以不用_weak typeof (self)weakSelf = self;
+
