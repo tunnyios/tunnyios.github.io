@@ -33,7 +33,7 @@ owner:
   instagram:      
   flickr:         
   tumblr:         
-  weibo: http://weibo.com/u/5637915118
+  weibo: 		http://weibo.com/5637915118/profile?topnav=1
   # For Google Authorship https://plus.google.com/authorship
 google_plus:    
 
@@ -90,7 +90,7 @@ textile_ext:  "textile"
 show_drafts: null
 limit_posts: 0
 future:      true
-unpublished: false
+unpublished: true
 
 # Plugins
 whitelist: []
@@ -99,18 +99,18 @@ gems:      []
 # Conversion
 markdown:    kramdown
 highlighter: pygments
-lsi:         false
+lsi:         true
 excerpt_separator: "<!--more-->"
 
 # Serving
-detach:  false
+detach:  true
 port:    4000
 host:    127.0.0.1
 baseurl: "/tunnyios.github.io" # the subpath of your site, e.g. /blog/
 url: "http://tunnyios.github.io" # the base hostname & protocol for your site
 
 # Backwards-compatibility
-relative_permalinks: false
+relative_permalinks: true
 
 # Outputting
 permalink:     /:categories/:title
@@ -142,7 +142,7 @@ kramdown:
   entity_output:  as_char
   toc_levels:     1..6
   smart_quotes:   lsquo,rsquo,ldquo,rdquo
-  enable_coderay: false
+  enable_coderay: true
 
   coderay:
     coderay_wrap:              div
