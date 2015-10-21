@@ -50,7 +50,38 @@ __weak typeof(self) weakSelf = self;
 
 其实总结下来也就是：控制器强引用着 block 。凡是控制器的对象，或者控制器的成员变量(*无论成员变量是基础类型还是其他的*),或者是类的方法调用，类的成员变量的方法调用，，只要在 block 中就会被强引用，(间接导致 block 强引用了控制器)。引发循环引用，最终导致内存泄漏！
 
-**即：保险起见block中所有的涉及到self的全给替换成weakSelf**
+**即：初学者保险起见可以把block中所有的涉及到self的全给替换成weakSelf**
 
-另外：系统自带的动画的 block 方法、 dispathafter()等方法，可以不用_weak typeof (self)weakSelf = self;
+但是每种情况都采用这种方法有时候并不好。试想下，如果我们有个对象，用于发送一个后台任务（比如下载数据），并且调用了self的一个方法。这时如果我们弱引用self，该对象的生命周期结束早于闭包结束被释放，因而当我们的闭包调用的*doSomething()*方法，该对象可能就不存在了，方法也得不到执行。因此如果在闭包外面弱引用了self，则遇到这种情况就又需要在闭包内声明一个强引用指向弱引用。(PS:*这种语法不仅恶心乏味不直观，而且违反了闭包作为一个独立处理实体的原则*)
+
+{% highlight objective-c %}
+__weak __typeof(self)weakSelf = self; 
+int i = 0;
+AFNetworkReachabilityStatusBlock callback = ^(AFNetworkReachabilityStatus status) 
+{ 
+	__strong __typeof(weakSelf)strongSelf = weakSelf; 
+	strongSelf.networkReachabilityStatus = status; 
+	if (strongSelf.networkReachabilityStatusBlock) { 
+		strongSelf.networkReachabilityStatusBlock(status); 
+	}
+}; 
+{% endhighlight %}
+
+函数的闭包和 block 如果没有引用任何实例或类变量，其本身也不会造成循环引用。最常见的一个例子就是 UIView 的 animateWithDuration。
+
+{% highlight objective-c %}
+func myMethod() {
+   ...
+   [UIView animateWithDuration:0.3 animations:^{
+	       self.someOutlet.alpha = 1.0
+	       self.someMethod()
+       }];
+}
+{% endhighlight %}
+
+PS:系统自带的动画的 block 方法、 GCD()等方法，可以不用_weak typeof (self)weakSelf = self;
+GCD方法，闭包会强引用self，但是实例化的self不会强引用闭包，所以一旦闭包结束，它就会被释放，所以循环引用也不会产生；
+
+**学会理解对象的生命周期，明白何时应该声明弱引用，以及对象生存周期的意义，这很重要**
+
 

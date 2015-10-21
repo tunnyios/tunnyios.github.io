@@ -1,8 +1,8 @@
 title:            tunny
 description:      "Talk is cheap, show me the code"
 logo:             omikron.png
-disqus_shortname:
-duoshuo_shortname: tunny 
+disqus_shortname:	tunny
+duoshuo_shortname:  
 # Assign a default image for your site's header and footer
 default_bg:       http://7xke07.com1.z0.glb.clouddn.com/image/background01.jpg
 search:           true
@@ -21,19 +21,19 @@ fin_color:        "255,255,255"
 owner:
   name:           tunnyios
   avatar:         moe.png
-  email:          shc245245@126.com
+  email:          suhongcheng@gmail.com
   # Use the coder's toolbox at http://coderstoolbox.net/string/#!encoding=xml&action=encode&charset=us_ascii to encode your description into XML string
   description:    享受生活
   # Social networking links used in footer. Update and remove as you like.
-  twitter:        
+  twitter:      https://twitter.com/suhongcheng  
   facebook:       
-  github:         tunnyios
+  github:		https://github.com/tunnyios
   stackexchange:  
   linkedin:       
   instagram:      
   flickr:         
   tumblr:         
-  weibo: suhongcheng@gmail.com
+  weibo: http://weibo.com/5637915118/profile?topnav=1&wvr=6
   # For Google Authorship https://plus.google.com/authorship
 google_plus:    
 
@@ -149,7 +149,7 @@ kramdown:
     coderay_line_numbers:      inline
     coderay_line_number_start: 1
     coderay_tab_width:         4
-    coderay_bold_every:        10
+    coderay_bold_every:        8
     coderay_css:               style
 
 redcloth:
